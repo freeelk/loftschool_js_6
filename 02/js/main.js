@@ -74,14 +74,26 @@ document.addEventListener('mousemove', function (e) {
     dragObject.oldX = e.pageX;
     dragObject.oldY = e.pageY;
 
-    dragObject.style.left = parseInt(dragObject.style.left, 10) - shiftX + 'px';
-    dragObject.style.top = parseInt(dragObject.style.top, 10) - shiftY + 'px';
+    var left = parseInt(dragObject.style.left, 10) - shiftX;
+    var top = parseInt(dragObject.style.top, 10) - shiftY;
+
+    var width = parseInt(dragObject.style.width, 10);
+    var height = parseInt(dragObject.style.height, 10);
+
+    var clientWidth = parseInt(document.documentElement.clientWidth, 10);
+    var clientHeight = parseInt(document.documentElement.clientHeight, 10);
+
+    left = left < 0 ? 0 : left + width > clientWidth ? clientWidth - width : left;
+    top = top < 0 ? 0 : top + height > clientHeight ? clientHeight - height : top;
+
+    dragObject.style.left = left + 'px';
+    dragObject.style.top = top + 'px';
 });
 
 document.addEventListener('mouseup', function () {
     dragObject = null;
 });
-}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_86fad729.js","/")
+}).call(this,require("pBGvAp"),typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/fake_c051ccb5.js","/")
 },{"buffer":3,"pBGvAp":5}],2:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';

@@ -72,8 +72,20 @@ document.addEventListener('mousemove', function (e) {
     dragObject.oldX = e.pageX;
     dragObject.oldY = e.pageY;
 
-    dragObject.style.left = parseInt(dragObject.style.left, 10) - shiftX + 'px';
-    dragObject.style.top = parseInt(dragObject.style.top, 10) - shiftY + 'px';
+    var left = parseInt(dragObject.style.left, 10) - shiftX;
+    var top = parseInt(dragObject.style.top, 10) - shiftY;
+
+    var width = parseInt(dragObject.style.width, 10);
+    var height = parseInt(dragObject.style.height, 10);
+
+    var clientWidth = parseInt(document.documentElement.clientWidth, 10);
+    var clientHeight = parseInt(document.documentElement.clientHeight, 10);
+
+    left = left < 0 ? 0 : left + width > clientWidth ? clientWidth - width : left;
+    top = top < 0 ? 0 : top + height > clientHeight ? clientHeight - height : top;
+
+    dragObject.style.left = left + 'px';
+    dragObject.style.top = top + 'px';
 });
 
 document.addEventListener('mouseup', function () {
